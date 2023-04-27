@@ -22,22 +22,60 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'web'], function () {
 
+    // Halaman Login
     Route::get('/', [LoginController::class, 'login'])->name('login');
-    Route::post('loginaksi', [LoginController::class, 'loginaksi'])->name('loginaksi');
-    Route::post('loginstore', [LoginController::class, 'loginStore'])->name('loginStore');
 
+    // Auth Attempt
+    Route::post('/loginaksi', [LoginController::class, 'loginaksi'])->name('loginaksi');
+
+    // Register
+    Route::post('/loginstore', [LoginController::class, 'loginStore'])->name('loginStore');
+
+
+    // Auth URL
     Route::middleware('auth')->group(function () {
     
-        Route::get('logoutaksi', [LoginController::class, 'logoutaksi'])->name('logoutaksi');
-        Route::get('home', [DashboardController::class, 'index'])->name('home');
+        // Logout
+        Route::get('/logoutaksi', [LoginController::class, 'logoutaksi'])->name('logoutaksi');
 
+        // Dashboard
+        Route::get('/home', [DashboardController::class, 'index'])->name('home');
+
+
+        // Section Siswa 
+
+        // Tampil Data ( Read )
         Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa');
+
+        // Tambah Data ( Create )
+        Route::post('/siswa/store', [SiswaController::class, 'store'])->name('siswaStore');
+
+        // Edit Data ( Edit )
+        Route::post('/siswa/update/{idsiswa}', [SiswaController::class, 'update'])->name('siswaUpdate');
+
+        // Hapus Data ( Delete )
+        Route::post('/siswa/delete/{idsiswa}', [SiswaController::class, 'delete'])->name('siswaDelete');
+
+        // Fitur        
         Route::get('/siswa/cari', [SiswaController::class, 'cari'])->name('siswaCari');
+        Route::get('/restore', [KelasController::class, 'restore'])->name('kelasRestore');
         
-        Route::get('kelas', [KelasController::class, 'index'])->name('kelas');
-        Route::post('kelas/store', [KelasController::class, 'store'])->name('kelasStore');
-        Route::post('kelas/update/{idkelas}', [KelasController::class, 'update'])->name('kelasUpdate');
-        Route::get('kelas/delete/{idkelas}', [KelasController::class, 'delete'])->name('kelasDelete');
+
+        // Section Kelas
+        
+        // Tampil Data ( Read )
+        Route::get('/kelas', [KelasController::class, 'index'])->name('kelas');
+
+        // Tambah Data ( Create )
+        Route::post('/kelas/store', [KelasController::class, 'store'])->name('kelasStore');
+
+        // Edit Data ( Edit )
+        Route::post('/kelas/update/{idkelas}', [KelasController::class, 'update'])->name('kelasUpdate');
+
+        // Delete Data ( Delete )
+        Route::post('/kelas/delete/{idkelas}', [KelasController::class, 'delete'])->name('kelasDelete');
+
+
 
         Route::get('/pembayaran',  [TransaksiController::class, 'index'])->name('pembayaran');
         Route::get('/pembayaran/cari',  [TransaksiController::class, 'cari'])->name('pembayaranCari');
@@ -48,5 +86,3 @@ Route::group(['middleware' => 'web'], function () {
     }); 
 
 });
-// Route::get('/transaksi/add', [TransaksiController::class, 'crudadd']);
-// Route::get('/transaksi/store', [TransaksiController::class, 'crudstore'])->name('crudStore');

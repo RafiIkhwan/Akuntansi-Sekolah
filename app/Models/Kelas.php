@@ -17,4 +17,9 @@ class Kelas extends Model
         'kompetensi_keahlian',
     ];
     protected $dates = ['deleted_at'];
+
+    public function siswa()
+    {
+        return $this->hasMany(Siswa::class, 'id_kelas');
+    }
 }

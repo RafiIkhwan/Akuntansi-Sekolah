@@ -33,7 +33,7 @@ class LoginController extends Controller
         ];
 
         if(Auth::attempt($data)){
-            return redirect('home')->with('success', 'Berhasil Login !');
+            return redirect('home')->with('success', 'Selamat datang ' . Auth::user()->nama_admin . ' !' );
         }
         else{
             Session::flash('error', 'Email atau Password Salah !');

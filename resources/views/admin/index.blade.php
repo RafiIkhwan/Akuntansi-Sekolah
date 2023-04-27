@@ -35,6 +35,7 @@
                         </div>
                     </nav>
                 </div><br><br><br>
+                {{-- <div class="bg-body position-fixed w-100" style="top: 72px; height: 6px;"></div> --}}
                 <div class="d-flex flex-row mx-3">
                     <div style="max-width: 150px; min-height: 85%;" class="mt-2 d-flex shadow-sm border rounded position-fixed mb-3">
                         <div class="d-flex flex-column bg-body rounded">

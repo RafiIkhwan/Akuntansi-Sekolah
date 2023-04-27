@@ -4,26 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Siswa extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
 
     protected $table = "tbl_siswa";
     protected $primaryKey = "id_siswa";
 
     protected $fillable = [
-        'id_biaya',
         'id_kelas',
         'id_spp',
         'nis',
         'nisn',
         'nama_siswa',
-        'tahun_ajaran',
-        'jurusan',
         'hp',
         'alamat',
-    ];
+    ];    
+    
+    protected $dates = ['deleted_at'];
 
     public function spp()
     {

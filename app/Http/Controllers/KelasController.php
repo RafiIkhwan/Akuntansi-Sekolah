@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
@@ -53,7 +54,20 @@ class KelasController extends Controller
         $kelas = Kelas::find($idkelas);
         $kelas->delete();
 
+        $siswa = Siswa::where('id_kelas', $idkelas)->get();
+        foreach ($siswa as $s){
+            $s->delete();
+        }
+
         return redirect()->back()->with('success', 'Berhasil menghapus kelas');
         
+    }
+
+    public function restore()
+    {
+        Kelas::onlyTrashed()->restore();
+        Siswa::onlyTrashed()->restore();
+
+        return redirect('kelas')->with('success', 'Berhasil mengembalikan data kelas');
     }
 }

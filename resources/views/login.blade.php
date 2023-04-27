@@ -35,11 +35,11 @@
                     @csrf
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" name="email" class="form-control" placeholder="Email" required="">
+                        <input type="email" name="email" class="form-control" placeholder="Email" required>
                     </div>
                     <div class="form-group mt-1">
                         <label>Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Password" required="">
+                        <input type="password" name="password" class="form-control" placeholder="Password" required>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary btn-block px-3">Log In</button>

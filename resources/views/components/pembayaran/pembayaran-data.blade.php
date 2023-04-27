@@ -23,11 +23,11 @@
                     </tr>
                     <tr>
                         <th scope="row">Tahun Ajaran</th>
-                        <td>: {{ $siswa->tahun_ajaran }}</td>
+                        <td>: {{ $siswa->spp->tahun_ajaran }}</td>
                     </tr>
                     <tr>
                         <th scope="row">Jurusan</th>
-                        <td>: {{ $siswa->jurusan }}</td>
+                        <td>: {{ $siswa->kelas->kompetensi_keahlian }}</td>
                     </tr>
                     <tr>
                         <th scope="row">No Hp</th>

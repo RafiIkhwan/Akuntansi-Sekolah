@@ -38,7 +38,9 @@ class TransaksiController extends Controller
             $query->where('nis', $cari)
                   ->orWhere('nisn', $cari);
         })
-        ->where('tahun_ajaran', 'LIKE', '%' . $tahun . '%');
+        ->whereHas('spp', function ($query) use ($tahun) {
+            $query->where('tahun_ajaran', 'LIKE', '%' . $tahun . '%');
+        });
         
         if (!$data_siswa->first()) {
             return redirect('pembayaran')->withInput()->with('error', 'Siswa dengan NIS/N ' . $cari . ' tidak ditemukan di Tahun Ajaran ' . $tahun);
