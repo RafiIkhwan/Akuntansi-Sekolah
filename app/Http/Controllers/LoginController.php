@@ -45,34 +45,37 @@ class LoginController extends Controller
     public function loginStore(Request $request)
     {
         $this->validate($request,[
-            'nama_admin'   => ['required'],
+            'nama_admin'    => ['required'],
             'email'         => ['required'],
             'password'      => ['required'],
-        ]);
-
-        User::create([
-            'nama_admin'   => $request->nama_admin,
-            'email'         => $request->email,
-            'password'      => Hash::make($request->password),
-            'created_at'    => Carbon::now(),
-            'updated_at'    => null
+            'role'          => ['required'],
         ]);
 
         $data = [
-            'nama_admin'   => $request->input('nama_admin'),
-            'email'         => $request->input('email'),
-            'password'      => $request->input('password'),
-            'created_at'    => Carbon::now(),
-            'updated_at'    => null
+            'email'     => $request->input('email'),
+            'password'  => $request->input('password')
         ];
 
-        if(Auth::attempt($data)){
-            return redirect('home')->with('success', 'Register berhasil !, silahkan login');
-        }
-        else{
-            Session::flash('error', 'Data tidak valid, atau sudah ada, coba buat baru');
+        $data_admin = User::where('email', $request->email)->first();
+       
+        if($data_admin){
+            Session::flash('error', 'Email sudah terdaftar, silahkan buat baru !');
             return redirect('/');
+        } else {
+            User::create([
+                'nama_admin'    => $request->nama_admin,
+                'email'         => $request->email,
+                'password'      => Hash::make($request->password),
+                'role'          => $request->role,
+            ]);
+
+            Auth::attempt($data);
+
+            return redirect('home')->with('success', 'Halo, selamat datang ' . Auth::user()->nama_admin . ' !' );
         }
+
+        
+        
     }
 
 

@@ -16,20 +16,16 @@ class DashboardController extends Controller
     public function index()
     {
         $siswa = Siswa::with('transaksi')->first();
-        $belumLunas = null;
 
         $sisa_bayar = Transaksi::select('id_siswa', DB::raw('SUM(sisa_bayar) as sisa_bayar'))
-                    ->groupBy('id_siswa')
-                    ->get();
+        ->groupBy('id_siswa')
+        ->get();
 
         $transaksi = Siswa::whereNotIn('id_siswa', $sisa_bayar->pluck('id_siswa'))
         ->orWhere(function($query) use ($sisa_bayar){
             $query->whereIn('id_siswa', $sisa_bayar->where('sisa_bayar', '>', 0)->pluck('id_siswa'));
         })
         ->get();
-
-
-        
 
         $data = [
             'data_siswa'        => Siswa::all(),

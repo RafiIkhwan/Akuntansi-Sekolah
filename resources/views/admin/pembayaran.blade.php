@@ -2,7 +2,7 @@
 @section('title', 'Pembayaran')
 @section('konten')
 
-<div class="container">
+<div class="container-md">
     <div class="h4">
         <i class="fa-solid fa-money-bill"></i> <span class="mr-5"> Transaksi Pembayaran</span>
     </div>

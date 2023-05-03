@@ -59,7 +59,7 @@ Route::group(['middleware' => 'web'], function () {
         // Fitur        
         Route::get('/siswa/cari', [SiswaController::class, 'cari'])->name('siswaCari');
         Route::get('/restore', [KelasController::class, 'restore'])->name('kelasRestore');
-        
+        Route::get('/kelas/cari', [KelasController::class, 'cari'])->name('kelasCari');
 
         // Section Kelas
         

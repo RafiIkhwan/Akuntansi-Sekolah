@@ -70,4 +70,15 @@ class KelasController extends Controller
 
         return redirect('kelas')->with('success', 'Berhasil mengembalikan data kelas');
     }
+
+    public function cari(Request $request)
+    {
+        $tbl_kelas = Kelas::where('nama_kelas', $request->cari)->paginate();
+        $no = ($tbl_kelas->currentPage() - 1) * $tbl_kelas->perPage() + 1;
+
+        return view('admin.kelas', [
+            'data_kelas' => $tbl_kelas,
+            'no'         => $no,
+        ]);
+    }
 }

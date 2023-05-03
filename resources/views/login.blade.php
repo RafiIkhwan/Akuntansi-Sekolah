@@ -8,7 +8,6 @@
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
         <link rel="icon" href="{{ asset('image/favicon.ico') }}">
     </head>
-
     <body>
         <div class="w-50 border shadow rounded mt-5 m-auto px-5">
             <div class="col-md-10 col-md-offset-10 m-auto py-4">
@@ -49,49 +48,7 @@
                 </form>
             </div>
         </div>
-        {{-- Tambah login --}}
-        <div class="absolute">
-            <div class="modal fade" id="loginTambah" tabindex="-1" aria-labelledby="Label" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-primary" id="Label">Register</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form action="{{ route('loginStore') }}" method="post" autocomplete="off">
-                            @csrf
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="namapetugas">Nama</label>
-                                    <input class="form-control" type="text" name="namapetugas" id="namapetugas" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="mt-2" for="email">Email</label>
-                                    <input class="form-control" type="text" name="email" id="email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="mt-2" for="password">Password</label>
-                                    <input class="form-control" type="password" name="password" id="password" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="mt-2" for="hp">Hp</label>
-                                    <input class="form-control" type="text" name="hp" id="hp" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="mt-2" for="role">Role</label>
-                                    <input class="form-control" type="text" name="role" id="role" required><br>
-                                </div>
-                                <span class="text-black-50"><span class="text-dark">Waktu :</span> {{ $date }}</span>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('regis')
         <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
     </body>
 </html>

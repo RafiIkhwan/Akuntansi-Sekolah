@@ -2,7 +2,7 @@
 @section('title', 'Dashboard')
 @section('konten')
 
-<div class="container">
+<div class="container-md">
     <div class="row">
         <div class="col-md-4 mb-4">
             <a href="/siswa" style="text-decoration: none;">
