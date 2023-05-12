@@ -28,6 +28,8 @@ class SiswaController extends Controller
 
     public function store(Request $request)
     {
+        $nis    = Siswa::where('nis', $request->nis)->first();
+        $nisn   = Siswa::where('nisn', $request->nisn)->first();
         $this->validate($request,[
             'nis'       => ['required', 'max:10'],
             'nisn'      => ['required', 'max:10'],
@@ -37,20 +39,25 @@ class SiswaController extends Controller
             'alamat'    => ['required'],
             'nohp'      => ['required'],
         ]);
+        $both = $nis ? $request->nis : $request->nisn;
 
-        Siswa::create([
-            'nis'       => $request->nis,
-            'nisn'      => $request->nisn,
-            'nama_siswa'=> $request->namasiswa,
-            'id_spp'    => $request->idspp,
-            'id_kelas'  => $request->kelas,
-            'alamat'    => $request->alamat,
-            'hp'        => $request->nohp,
-            'created_at'=> Carbon::now(),
-            'updated_at'=> null
-        ]);
-
-        return redirect()->back()->with('success', 'Data Siswa berhasil ditambahkan !');
+        if($nis || $nisn){
+            return redirect()->back()->with('error', 'Gagal menambahkan data, data dengan nis/nisn ' . $both . ' sudah ada');
+        } else{
+            Siswa::create([
+                'nis'       => $request->nis,
+                'nisn'      => $request->nisn,
+                'nama_siswa'=> $request->namasiswa,
+                'id_spp'    => $request->idspp,
+                'id_kelas'  => $request->kelas,
+                'alamat'    => $request->alamat,
+                'hp'        => $request->nohp,
+                'created_at'=> Carbon::now(),
+                'updated_at'=> null
+            ]);
+            
+            return redirect()->back()->with('success', 'Data Siswa berhasil ditambahkan !');
+        }
     }
 
     public function update($idsiswa, Request $request)
@@ -84,7 +91,7 @@ class SiswaController extends Controller
         $siswa = Siswa::find($idsiswa);
         $siswa->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('edit', 'Data Siswa berhasil dihapus !');
     }
 
 

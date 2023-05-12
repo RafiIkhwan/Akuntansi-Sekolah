@@ -15,15 +15,24 @@ return new class extends Migration
     {
         Schema::create('tbl_transaksi', function (Blueprint $table) {
             $table->id('id_transaksi');
-            $table->foreignId('id_siswa');
-            $table->foreignId('id_admin');
+            $table->unsignedBigInteger('id_siswa');
+            $table->unsignedBigInteger('id_admin');
             $table->date('tanggal');
             $table->integer('total_bayar');
-            // $table->integer('dibayar');
-            // $table->integer('kembali');
             $table->integer('sisa_bayar');
-            $table->integer('bulan');
+            $table->integer('kembali')->nullable();
+            $table->string('bulan', 20);
             $table->timestamps();
+            $table->foreign('id_siswa')
+            ->references('id_siswa')
+            ->on('tbl_siswa')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+            $table->foreign('id_admin')
+            ->references('id_admin')
+            ->on('users')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
         });
     }
 

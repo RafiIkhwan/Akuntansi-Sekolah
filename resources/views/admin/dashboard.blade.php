@@ -4,6 +4,7 @@
 
 <div class="container-md">
     <div class="row">
+        @if (Auth::user()->role == 'Admin')
         <div class="col-md-4 mb-4">
             <a href="/siswa" style="text-decoration: none;">
                 <div class="card bg-primary" style="position: static !important;">
@@ -28,6 +29,7 @@
                 </div>
             </a>
         </div>
+        @endif
         <div class="col-md-4 mb-4">
             <div class="card bg-warning" style="position: static !important;">
                 <div class="card-header">

@@ -11,11 +11,12 @@
     </div>
     <br>
     <div class="d-flex py-3 w-100 border-top">
-        <form action="/siswa/cari" method="get" class="d-flex w-100">
+        <form action="{{ route('siswaCari') }}" method="get" class="d-flex w-100">
             <input class="form-control" name="cari" type="search" placeholder="Search" aria-label="Search" value="{{ old('cari') }}">
             <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
     </div>
+    @if (count($data_siswa) > 0)
     <div class="table-responsive"> 
         <table class="table">
             <thead>
@@ -50,8 +51,10 @@
         </table>
     </div>
     {{ $data_siswa->links() }}
+    @else
+    <p class="text-center">Tidak ada data tersedia</p><br>
+    @endif
 </div>
-
 
 @include('components.siswa.modal-siswa')
     

@@ -9,7 +9,7 @@
                         <li class="dropdown-item">a</li>
                     </ul>
                 </div> --}}
-                <div id="topNav">
+                <div id="topNav" class="d-flex flex-row align-items-center">
                     <ul class="navbar-nav flex-row mb-auto">
                         <li class="nav-item px-1">
                             <a class="nav-link bg-body {{ request()->is('pembayaran') || request()->is('pembayaran/cari') ? 'text-dark' : '' }}" href="{{ route('pembayaran') }}">Pembayaran</a>
@@ -24,6 +24,9 @@
                         <li class="nav-item px-1">
                             <a class="nav-link bg-body {{ request()->is('kelas') || request()->is('kelas/cari') ? 'text-dark' : '' }}" href="{{ route('kelas') }}">Kelas</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link bg-body {{ request()->is('spp') ? 'text-dark' : '' }}" href="{{ route('spp') }}">SPP</a>
+                        </li>
                         <li class="nav-item px-1">
                             <a class="nav-link bg-body {{ request()->is('transaksi') ? 'text-dark' : '' }}" href="{{ route('transaksi') }}">Transaksi</a>
                         </li>
@@ -36,7 +39,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {{-- <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#petugasEdit-{{ Auth::id() == $admin->idpetugas }}" class="btn btn-primary py-2" ><i class="fa-regular fa-user"></i> Edit Profile</a></li> --}}
-                    <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fa-solid fa-user"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fa-solid fa-user"></i> Profile</a></li>
                             <li><a class="dropdown-item" href="{{ route('logoutaksi') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
                         </ul>
                     </div> 

@@ -11,19 +11,19 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="nama_admin">Nama</label>
-                            <input class="form-control" type="text" name="nama_admin" id="nama_admin" required>
+                            <label class="form-label" for="nama_admin">Nama</label>
+                            <input class="form-control" type="text" name="nama_admin" id="nama_admin" required autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <label class="mt-2" for="email">Email</label>
-                            <input class="form-control" type="text" name="email" id="email" required>
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-control" type="text" name="email" id="email" required autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <label class="mt-2" for="password">Password</label>
-                            <input class="form-control" type="password" name="password" id="password" required>
+                            <label class="form-label" for="password">Password</label>
+                            <input class="form-control" type="password" name="password" id="password" required autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <label class="mt-2" for="role">Role</label>
+                            <label class="form-label" for="role">Role</label>
                             <select class="form-control" name="role" id="role" required>
                                 <option @disabled(true)>Pilih Role</option>
                                 <option value="Admin">Admin</option>
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>

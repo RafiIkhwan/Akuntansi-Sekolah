@@ -74,4 +74,28 @@ class AdminController extends Controller
 
         return redirect('/')->with('edit', 'Akun berhasil dihapus, harap register kembali!');
     }
+
+    public function table()
+    {
+        $data_petugas = User::paginate(5);
+        $no = ($data_petugas->currentPage() - 1) * $data_petugas->perPage() + 1;
+
+
+        return view('admin.petugas', [
+            'data_petugas'  => $data_petugas,
+            'no'            => $no,
+        ]);
+    }
+
+    public function cari(Request $request)
+    {
+        $data_petugas = User::where('nama_admin', $request->cari)->paginate(5);
+        $no = ($data_petugas->currentPage() - 1) * $data_petugas->perPage() + 1;
+
+
+        return view('admin.petugas', [
+            'data_petugas'  => $data_petugas,
+            'no'            => $no,
+        ]);
+    }
 }

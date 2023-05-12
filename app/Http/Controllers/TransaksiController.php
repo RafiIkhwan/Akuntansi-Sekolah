@@ -66,16 +66,40 @@ class TransaksiController extends Controller
             'no' => $no,
         ]);
     }
+    public function cari2(Request $request)
+    {
+        $cari   = $request->cari;
+
+        $tbl_transaksi = Transaksi::whereHas('siswa', function ($query) use ($cari) {
+            $query->where('nama_siswa', 'LIKE', '%' . $cari . '%');
+        })->paginate(5);
+
+        $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        $no = 1;
+
+        return view('admin.transaksi', [
+            'data_siswa' => Siswa::all(),
+            'data_tahun' => SPP::all(),
+            'bulan'     => $bulan,
+            'data_transaksi' => $tbl_transaksi,
+            'cari' => $cari,
+            'no' => $no,
+        ]);
+    }
 
     
     public function table()
     {
         $tbl_transaksi = Transaksi::paginate(5);
+        $data_siswa = Siswa::all();
         $no = ($tbl_transaksi->currentPage() - 1) * $tbl_transaksi->perPage() + 1;
+        $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         $date = date("d M Y - H:m");
 
         return view('admin.transaksi', [
             'data_transaksi'=> $tbl_transaksi,
+            'data_siswa'    => $data_siswa,
+            'bulan'         => $bulan,
             'no'            => $no,
             'date'          => $date, 
         ]);

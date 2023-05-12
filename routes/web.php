@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\SPPController;
 use App\Http\Controllers\TransaksiController;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\Route;
@@ -67,7 +68,23 @@ Route::group(['middleware' => 'web'], function () {
             
             Route::prefix('/petugas')->group(function () 
             {
-                Route::get('/', [AdminController::class, 'index'])->name('petugas');
+                Route::get('/', [AdminController::class, 'table'])->name('petugas');
+                Route::get('/cari', [AdminController::class, 'cari'])->name('petugasCari');
+            });
+
+            Route::prefix('/transaksi')->group(function ()
+            {
+                Route::get('/',  [TransaksiController::class, 'table'])->name('transaksi');
+                Route::get('/cari',  [TransaksiController::class, 'cari2'])->name('transaksiCari');
+            });
+
+            Route::prefix('/spp')->group(function ()
+            {
+                Route::get('/', [SPPController::class, 'index'])->name('spp');
+                Route::get('/cari', [SPPController::class, 'cari'])->name('sppCari');
+                Route::post('/store', [SPPController::class, 'store'])->name('sppStore');
+                Route::post('/update/{idspp}', [SPPController::class, 'update'])->name('sppUpdate');
+                Route::post('/delete/{idspp}', [SPPController::class, 'delete'])->name('sppDelete');
             });
         });
             
@@ -88,7 +105,6 @@ Route::group(['middleware' => 'web'], function () {
             Route::post('/hapus',  [TransaksiController::class, 'delete'])->name('pembayaranHapus');
         });
 
-        Route::get('/transaksi',  [TransaksiController::class, 'table'])->name('transaksi');
     }); 
 
 });

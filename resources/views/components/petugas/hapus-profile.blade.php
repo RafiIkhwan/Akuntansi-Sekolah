@@ -13,7 +13,7 @@
                     <div class="p-3">
                         <h5>Apakah anda yakin ingin menghapus akun ?</h5>
                         <p>Menghapus akun anda berarti anda akan kehilangan data-data yang terkait dengan akun ini</p>
-                        <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
                     </div>
                 </div>
                 <div class="modal-footer">

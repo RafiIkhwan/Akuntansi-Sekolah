@@ -1,21 +1,21 @@
 <div class="absolute">
-    <div class="modal fade" id="kelasTambah">
+    <div class="modal fade" id="sppTambah">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-primary" id="Label">Tambah Data Kelas</h5>
+                    <h5 class="modal-title text-primary" id="Label">Tambah Data SPP</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('kelasStore') }}" method="post">
+                <form action="{{ route('sppStore') }}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group mt-1">
-                        <label class="my-1" for="kelas">Nama Kelas</label>
-                        <input type="text" class="form-control" id="kelas" name="kelas" required>
+                        <label class="my-1" for="tahunajar">Tahun Ajaran</label>
+                        <input class="form-control" type="text" id="tahunajar" name="tahunajar" autocomplete="off" required placeholder="2022/2023">
                     </div>
                     <div class="form-group mt-1">
-                        <label class="my-1" for="kk">Nama Kompetensi Keahlian</label>
-                        <input type="text" class="form-control" id="kk" name="kk" required>
+                        <label for="biaya" class="my-1">Biaya</label>
+                        <input class="form-control" type="number" id="biaya" name="biaya" autocomplete="off" required>
                     </div>
                 </div>
                 <div class="modal-footer">

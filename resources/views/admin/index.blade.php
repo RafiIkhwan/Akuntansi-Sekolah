@@ -32,7 +32,7 @@
         </div>
         <br><br>
 
-        @include('components.footer')
+        {{-- @include('components.footer') --}}
         <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
     </body>
 </html>

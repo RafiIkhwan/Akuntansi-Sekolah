@@ -16,6 +16,7 @@
             <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
     </div>
+    @if (count($data_kelas) > 0)
     <table class="table table-responsive">
         <thead>
             <th>No</th>
@@ -36,9 +37,11 @@
         @endforeach
     </table>
     {{ $data_kelas->links() }}
+    @else
+    <p class="text-center">Tidak ada data tersedia</p><br>
+    @endif
 </div>
 <br>
-    
-@include('components.kelas.modal-kelas')
 
+@include('components.kelas.modal-kelas')
 @endsection

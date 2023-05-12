@@ -16,6 +16,7 @@
                 <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
         </div>
+        @if (count($data_transaksi) > 0)
         <div class="table-responsive"> 
             <table class="table">
                 <thead>
@@ -47,7 +48,7 @@
                         @if ($transaksi->sisa_bayar < 0)
                         {{ abs($transaksi->sisa_bayar) }}
                         @elseif ($transaksi->kembali == NULL)
-                            <i>NULL</i>
+                        <i>NULL</i>
                         @endif
                     </td>
                     <td>{{ $transaksi->bulan }}</td>
@@ -60,6 +61,10 @@
             </table>
         </div>
         {{ $data_transaksi->links() }}
+        @else
+        <p class="text-center">Tidak ada data tersedia</p><br>
+        @endif
     </div>
 
+@include('components.transaksi.modal-transaksi')
 @endsection

@@ -9,12 +9,12 @@
         <link rel="icon" href="{{ asset('image/favicon.ico') }}">
     </head>
     <body>
-        <div class="w-50 border shadow rounded mt-5 m-auto px-5">
+        <div class="text-center mb-3 mt-5">
+            <img src="{{ asset('image/logo.png') }}" alt="Logo SMK 1 Cimahi" class="img-fluid border-none" style="max-width:15%;">                        
+        </div>
+        <h3 class="text-center">Akuntansi Sekolah</h3><br>
+        <div class="w-50 border shadow rounded-3 m-auto px-2">
             <div class="col-md-10 col-md-offset-10 m-auto py-4">
-                <div class="text-center mb-3">
-                    <img src="{{ asset('image/logo.png') }}" alt="Logo SMK 1 Cimahi" class="img-fluid border-none" style="max-width:40%;">                        
-                </div>
-                <h2 class="text-center">Akuntansi Sekolah</h2><br>
                 @if (session('error'))
                     <div class="alert alert-danger">
                         <b>Error : </b> {{ session('error') }}
@@ -33,22 +33,22 @@
                 <form action="{{ route('loginaksi') }}" method="post">
                     @csrf
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+                        <label class="form-label" for="email">Email</label>
+                        <input id="email" type="email" name="email" class="form-control" placeholder="Email" autocomplete="off" required>
                     </div>
                     <div class="form-group mt-1">
-                        <label>Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                        <label class="form-label" for="email">Password</label>
+                        <input id="password" type="password" name="password" class="form-control" placeholder="Password" autocomplete="off" required>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary btn-block px-3">Log In</button>
+                    <button type="submit" class="btn btn-primary btn-block form-control">Log In</button>
                     <hr>
-                    <p class="text-center" >Belum punya akun? <a href="" data-bs-toggle="modal" data-bs-target="#loginTambah" >Register</a> sekarang!</p>
-                                        
+                    <p class="text-center" >Belum punya akun? <a href="" data-bs-toggle="modal" data-bs-target="#loginTambah" >Register</a> sekarang!</p>           
                 </form>
             </div>
         </div>
         @include('regis')
+        <br><br>
         <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
     </body>
 </html>

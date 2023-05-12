@@ -15,16 +15,25 @@ return new class extends Migration
     {
         Schema::create('tbl_siswa', function (Blueprint $table) {
             $table->id('id_siswa');
-            $table->foreignId('id_kelas');
-            $table->foreignId('id_spp');
+            $table->unsignedBigInteger('id_kelas');
+            $table->unsignedBigInteger('id_spp');
             $table->char('nis', 8);
             $table->char('nisn', 12);
             $table->string('nama_siswa');
-            $table->string('tahun_ajaran');
-            $table->string('jurusan');
             $table->string('hp');
             $table->text('alamat');
             $table->timestamps();
+            $table->date('deleted_at')->nullable();
+            $table->foreign('id_kelas')
+            ->references('id_kelas')
+            ->on('tbl_kelas')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+            $table->foreign('id_spp')
+            ->references('id_spp')
+            ->on('tbl_spp')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
         });
     }
 
