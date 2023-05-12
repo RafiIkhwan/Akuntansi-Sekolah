@@ -24,13 +24,24 @@ class KelasController extends Controller
             'kelas'     => ['required'],
             'kk'        => ['required'],
         ]);
+        $symbol = array('-', ',', '+', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '=', '{', '}', ']', '[', ';', ':', "'", '"', '<', '>', '.', '', '?');
 
-        Kelas::create([
-            'nama_kelas'            => $request->kelas,
-            'kompetensi_keahlian'   => $request->kk,
-        ]);
+        $formated = str_replace($symbol, ' ', $request->kelas);
+        $trimmed = preg_replace('/\s+/', ' ', trim($formated));
 
-        return redirect()->back()->with('success', 'Data Kelas Berhasil Ditambahkan!');
+        $kelas = Kelas::where('nama_kelas', $trimmed)->first();
+        
+        if($kelas){
+            return redirect()->back()->with('error', 'Data kelas '. $trimmed .' sudah ada');
+        } else{
+            
+             Kelas::create([
+                'nama_kelas'            => $formated,
+                'kompetensi_keahlian'   => $request->kk,
+            ]);
+            
+            return redirect()->back()->with('success', 'Data Kelas Berhasil Ditambahkan!');    
+        }
     }
 
     public function update($idkelas ,Request $request)
@@ -39,14 +50,24 @@ class KelasController extends Controller
             'kelas'     => ['required'],
             'kk'        => ['required'],
         ]);
+        $symbol = array('-', ',', '+', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '=', '{', '}', ']', '[', ';', ':', "'", '"', '<', '>', '.', '', '?');
 
-        $kelas = Kelas::find($idkelas);
-        $kelas->nama_kelas = $request->kelas;
-        $kelas->kompetensi_keahlian = $request->kk;
+        $formated = str_replace($symbol, ' ', $request->kelas);
+        $trimmed = preg_replace('/\s+/', ' ', trim($formated));
 
-        $kelas->save();
+        $kelas = Kelas::where('nama_kelas', $trimmed)->first();
+        
+        if($kelas){
+            return redirect()->back()->with('error', 'Data kelas '. $trimmed .' sudah ada');
+        } else{
+            $kelas = Kelas::find($idkelas);
+            $kelas->nama_kelas = $request->kelas;
+            $kelas->kompetensi_keahlian = $request->kk;
 
-        return redirect()->back()->with('edit', 'Data Kelas Berhasil di Edit!');
+            $kelas->save();
+
+            return redirect()->back()->with('edit', 'Data Kelas Berhasil di Edit!');
+        }
     }
 
     public function delete($idkelas)

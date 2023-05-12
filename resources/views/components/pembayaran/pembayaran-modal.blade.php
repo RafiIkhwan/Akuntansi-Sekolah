@@ -1,6 +1,7 @@
 @include('components.pembayaran.aksi.tambahPembayaran')
-@include('components.pembayaran.aksi.hapusPembayaran')
+@include('components.pembayaran.aksi.detailPembayaran')
 @include('components.pembayaran.aksi.editPembayaran')
+@include('components.pembayaran.aksi.konfirmasiHapus')
 
 
 <div class="absolute">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KelasController;
@@ -41,48 +42,53 @@ Route::group(['middleware' => 'web'], function () {
         // Dashboard
         Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
+        Route::middleware(['role:Admin'])->group(function ()
+        {
 
-        // Section Siswa 
+            Route::prefix('/siswa')->group(function ()
+            {
+                Route::get('/', [SiswaController::class, 'index'])->name('siswa');
+                Route::post('/store', [SiswaController::class, 'store'])->name('siswaStore');
+                Route::post('/update/{idsiswa}', [SiswaController::class, 'update'])->name('siswaUpdate');
+                Route::post('/delete/{idsiswa}', [SiswaController::class, 'delete'])->name('siswaDelete');
+                Route::get('/cari', [SiswaController::class, 'cari'])->name('siswaCari');
+            });
+            
+            Route::get('/restore', [KelasController::class, 'restore'])->name('kelasRestore');
+            
+            Route::prefix('/kelas')->group(function () 
+            {
+                Route::get('/', [KelasController::class, 'index'])->name('kelas');
+                Route::post('/store', [KelasController::class, 'store'])->name('kelasStore');
+                Route::post('/update/{idkelas}', [KelasController::class, 'update'])->name('kelasUpdate');
+                Route::post('/delete/{idkelas}', [KelasController::class, 'delete'])->name('kelasDelete');
+                Route::get('/cari', [KelasController::class, 'cari'])->name('kelasCari');
+            });
+            
+            Route::prefix('/petugas')->group(function () 
+            {
+                Route::get('/', [AdminController::class, 'index'])->name('petugas');
+            });
+        });
+            
+        Route::prefix('/profile')->group(function () 
+        {
+            Route::get('/', [AdminController::class, 'index'])->name('profile');
+            Route::post('/update', [AdminController::class, 'update'])->name('profileUpdate');
+            Route::post('/reset', [AdminController::class, 'reset'])->name('profileReset');
+            Route::post('/delete', [AdminController::class, 'delete'])->name('profileDelete');
+        });
 
-        // Tampil Data ( Read )
-        Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa');
+        Route::prefix('/pembayaran')->group(function ()
+        {
+            Route::get('/',  [TransaksiController::class, 'index'])->name('pembayaran');
+            Route::get('/cari',  [TransaksiController::class, 'cari'])->name('pembayaranCari');
+            Route::post('/store',  [TransaksiController::class, 'store'])->name('pembayaranStore');
+            Route::post('/update',  [TransaksiController::class, 'update'])->name('pembayaranUpdate');
+            Route::post('/hapus',  [TransaksiController::class, 'delete'])->name('pembayaranHapus');
+        });
 
-        // Tambah Data ( Create )
-        Route::post('/siswa/store', [SiswaController::class, 'store'])->name('siswaStore');
-
-        // Edit Data ( Edit )
-        Route::post('/siswa/update/{idsiswa}', [SiswaController::class, 'update'])->name('siswaUpdate');
-
-        // Hapus Data ( Delete )
-        Route::post('/siswa/delete/{idsiswa}', [SiswaController::class, 'delete'])->name('siswaDelete');
-
-        // Fitur        
-        Route::get('/siswa/cari', [SiswaController::class, 'cari'])->name('siswaCari');
-        Route::get('/restore', [KelasController::class, 'restore'])->name('kelasRestore');
-        Route::get('/kelas/cari', [KelasController::class, 'cari'])->name('kelasCari');
-
-        // Section Kelas
-        
-        // Tampil Data ( Read )
-        Route::get('/kelas', [KelasController::class, 'index'])->name('kelas');
-
-        // Tambah Data ( Create )
-        Route::post('/kelas/store', [KelasController::class, 'store'])->name('kelasStore');
-
-        // Edit Data ( Edit )
-        Route::post('/kelas/update/{idkelas}', [KelasController::class, 'update'])->name('kelasUpdate');
-
-        // Delete Data ( Delete )
-        Route::post('/kelas/delete/{idkelas}', [KelasController::class, 'delete'])->name('kelasDelete');
-
-
-
-        Route::get('/pembayaran',  [TransaksiController::class, 'index'])->name('pembayaran');
-        Route::get('/pembayaran/cari',  [TransaksiController::class, 'cari'])->name('pembayaranCari');
         Route::get('/transaksi',  [TransaksiController::class, 'table'])->name('transaksi');
-        Route::post('/transaksi/store',  [TransaksiController::class, 'store'])->name('transaksiStore');
-        Route::post('/transaksi/update',  [TransaksiController::class, 'update'])->name('transaksiUpdate');
-        Route::post('/transaksi/hapus',  [TransaksiController::class, 'delete'])->name('transaksiHapus');
     }); 
 
 });

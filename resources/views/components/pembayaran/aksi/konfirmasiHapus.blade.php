@@ -1,14 +1,14 @@
 @foreach ($data_transaksi as $transaksi)
 <div class="absolute">
-    <div class="modal fade" id="transaksiDetail-{{ $transaksi->id_transaksi }}" tabindex="-1" aria-labelledby="Label" aria-hidden="true">
+    <div class="modal fade" id="confirmDelete-{{ $transaksi->id_transaksi }}" tabindex="-1" aria-labelledby="Label" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-primary" id="Label">Detail Transaksi</h5>
+                    <h5 class="modal-title text-danger" id="Label">Yakin ingin menghapus?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 @foreach ($data_siswa as $siswa)
-                <form action="{{ route('transaksiHapus') }}" method="post">
+                <form action="{{ route('pembayaranHapus') }}" method="post">
                 {{ csrf_field() }}
                 <input class="" type="hidden" name="idsiswa" id="idsiswa" value="{{ $siswa->id_siswa }}" readonly>
                 <input class="" type="hidden" name="idadmin" id="idadmin" value="{{ Auth::user()->id_admin }}" readonly>
@@ -40,12 +40,8 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <div class="d-flex w-100 justify-content-between">
-                        <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#transaksiEdit-{{ $transaksi->id_transaksi }}" href=''>Edit</button>
-                        <div class="d-flex">
-                            <button class="btn btn-danger" type="submit" onclick="alert('Yakin ingin menghapus data bulan {{ $transaksi->bulan }}')" href=''>Hapus</button>
-                        </div>
-                    </div>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-danger" type="submit" href=''>Ya, Hapus</button>
                 </div>
                 </form>
                 @endforeach

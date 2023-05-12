@@ -14,8 +14,9 @@
                         <li class="nav-item px-1">
                             <a class="nav-link bg-body {{ request()->is('pembayaran') || request()->is('pembayaran/cari') ? 'text-dark' : '' }}" href="{{ route('pembayaran') }}">Pembayaran</a>
                         </li>
+                        @if (Auth::user()->role == 'Admin')
                         <li class="nav-item px-1">
-                            <a class="nav-link bg-body {{ request()->is('petugas') || request()->is('petugas/cari') ? 'text-dark' : '' }}" href="#">Petugas</a>
+                            <a class="nav-link bg-body {{ request()->is('petugas') || request()->is('petugas/cari') ? 'text-dark' : '' }}" href="{{ route('petugas') }}">Petugas</a>
                         </li>
                         <li class="nav-item px-1">
                             <a class="nav-link bg-body {{ request()->is('siswa') || request()->is('siswa/cari') ? 'text-dark' : '' }}" href="{{ route('siswa') }}">Siswa</a>
@@ -26,6 +27,7 @@
                         <li class="nav-item px-1">
                             <a class="nav-link bg-body {{ request()->is('transaksi') ? 'text-dark' : '' }}" href="{{ route('transaksi') }}">Transaksi</a>
                         </li>
+                        @endif
                     </ul>
                     <div id="profileNew" class="dropdown">
                         <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -34,6 +36,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {{-- <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#petugasEdit-{{ Auth::id() == $admin->idpetugas }}" class="btn btn-primary py-2" ><i class="fa-regular fa-user"></i> Edit Profile</a></li> --}}
+                    <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fa-solid fa-user"></i> Profile</a></li>
                             <li><a class="dropdown-item" href="{{ route('logoutaksi') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
                         </ul>
                     </div> 
@@ -45,6 +48,7 @@
                   <strong>{{ Auth::user()->nama_admin }}</strong>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fa-solid fa-user"></i> Profile</a></li>
                     <li><a class="dropdown-item" href="{{ route('logoutaksi') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
                 </ul>
             </div> 

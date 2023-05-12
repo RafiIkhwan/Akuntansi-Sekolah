@@ -8,8 +8,9 @@
                 <li class="nav-item">
                     <a class="nav-link bg-body {{ request()->is('pembayaran') || request()->is('pembayaran/cari') ? 'text-dark' : '' }}" href="{{ route('pembayaran') }}"><i class="fa-solid fa-money-bill"></i> Pembayaran</a>
                 </li>
+                @if (Auth::user()->role == 'Admin')
                 <li class="nav-item">
-                    <a class="nav-link bg-body {{ request()->is('petugas') || request()->is('petugas/cari') ? 'text-dark' : '' }}" href="#"><i class="fas fa-user"></i> Petugas</a>
+                    <a class="nav-link bg-body {{ request()->is('petugas') || request()->is('petugas/cari') ? 'text-dark' : '' }}" href="{{ route('petugas') }}"><i class="fas fa-user"></i> Petugas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link bg-body {{ request()->is('siswa') || request()->is('siswa/cari') ? 'text-dark' : '' }}" href="{{ route('siswa') }}"><i class="fas fa-users"></i> Siswa</a>
@@ -20,6 +21,7 @@
                 <li class="nav-item">
                     <a class="nav-link bg-body {{ request()->is('transaksi') ? 'text-dark' : '' }}" href="{{ route('transaksi') }}"><i class="fa-solid fa-money-bill-wave"></i> Transaksi</a>
                 </li>
+                @endif
             </ul>
         </nav>
     </div>

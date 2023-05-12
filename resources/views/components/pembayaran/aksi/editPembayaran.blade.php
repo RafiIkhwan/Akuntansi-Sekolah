@@ -9,7 +9,7 @@
                     <p class="text-light" style="font-size: 0px;">-</p>
                 </div>
                 @foreach ($data_siswa as $siswa)
-                <form action="{{ route('transaksiUpdate') }}" method="post">
+                <form action="{{ route('pembayaranUpdate') }}" method="post">
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">

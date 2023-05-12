@@ -27,7 +27,7 @@
                         <select class="form-control" name="idspp" id="idspp">
                             <option value="" @disabled(true)>Tahun Ajaran</option>
                             @foreach ($data_spp as $spp)
-                                <option value="{{ $spp->id_spp }}">{{ $spp->tahun_ajaran }}</option>
+                                <option value="{{ $spp->id_spp }}" @if($siswa->spp->tahun_ajaran == $spp->tahun_ajaran) selected @endif>{{ $spp->tahun_ajaran }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -36,7 +36,7 @@
                         <select class="form-control" name="kelas" id="kelas">
                             <option value="" @disabled(true)>Nama Kelas</option>
                             @foreach ($data_kelas as $kelas)
-                                <option value="{{ $kelas->id_kelas }}">{{ $kelas->nama_kelas }}</option>
+                                <option value="{{ $kelas->id_kelas }}" @if($siswa->kelas->nama_kelas == $kelas->nama_kelas) selected @endif>{{ $kelas->nama_kelas }}</option>
                             @endforeach
                         </select>
                     </div>

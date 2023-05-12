@@ -3,7 +3,6 @@
         Data Siswa
     </div>
     <div class="p-3">
-        @foreach ($data_siswa as $siswa)
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -41,8 +40,7 @@
                 </table>
                 </div>
             </div>
-            </div>     
-        @endforeach
+        </div>     
     </div>
 </div>
 <br>

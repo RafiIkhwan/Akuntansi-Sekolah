@@ -56,9 +56,9 @@ class TransaksiController extends Controller
         $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         $no = 1;
 
-
         return view('admin.pembayaran', [
             'data_siswa' => $data_siswa,
+            'siswa'      => $siswa,
             'data_tahun' => SPP::all(),
             'bulan'     => $bulan,
             'data_transaksi' => $tbl_transaksi,
@@ -181,6 +181,6 @@ class TransaksiController extends Controller
             $transaksi->forceDelete();
         }
 
-        return redirect()->back()->with('hapus', 'Data Pengembalian Berhasil di Hapus');
+        return redirect()->back()->with('error', 'Data Transaksi Berhasil di Hapus');
     }
 }

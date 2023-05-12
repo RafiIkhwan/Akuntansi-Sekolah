@@ -7,7 +7,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 @foreach ($data_siswa as $siswa)
-                <form action="{{ route('transaksiStore') }}" method="post">
+                <form action="{{ route('pembayaranStore') }}" method="post">
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <input class="form-control" type="hidden" name="idsiswa" id="idsiswa" value="{{ $siswa->id_siswa }}" readonly>

@@ -12,22 +12,14 @@
                 <div class="modal-body">
                     <span>Yakin ingin menghapus data Kelas <b>{{ $kelas->nama_kelas }}</b> ?</span>
                     <br><br>
+                    @if (count($kelas->siswa) > 0)
                     <span class="bg-danger text-light px-2 py-1 w-100">Anda juga akan kehilangan data-data dibawah</span>
                     <br><br>
-                    <div class="table-responsive">
+                    <h4>Data Siswa</h4>
+                    <div class="table-responsive shadow p-2">
                         <table class="table">
-                            <thead>
-                                <th>NIS</th>
-                                <th>NISN</th>
-                                <th>Nama Siswa</th>
-                                <th>Tahun Ajaran</th>
-                                <th>Jurusan</th>
-                                <th>Kelas</th>
-                                <th>Alamat</th>
-                                <th>No Hp</th>
-                            </thead>
                             @foreach($kelas->siswa as $siswa)
-                            <tbody style="font-size: 10pt;">
+                            <tbody style="font-size: 10pt;" class="text-nowrap">
                                 <td>{{ $siswa->nis }}</td>
                                 <td>{{ $siswa->nisn }}</td>
                                 <td>{{ $siswa->nama_siswa }}</td>
@@ -40,10 +32,13 @@
                             @endforeach
                         </table>
                     </div>
+                    @else
+
+                    @endif
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-danger" type="submit">Ya, hapus</button>
                 </div>
                 </form>
             </div>
